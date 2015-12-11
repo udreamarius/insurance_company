@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class CAS{
   
-  private int id;
+  private long int id;
   private int cnp;
   private int elib_card;
   private String name;
@@ -14,7 +14,7 @@ public class CAS{
 
   public CAS() {}
 
-  public CAS(int id, int cnp, int elib_card, String name, String address) {
+  public CAS(int id, long int cnp, int elib_card, String name, String address) {
       this.name = name;
       this.id = id;
       this.address = address;
