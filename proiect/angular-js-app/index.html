@@ -21,9 +21,8 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li><a href="persoana.html">Persoana</a></li>
-            <li><a href="card.html">Card</a></li>
-			<li><a href="index.html">CAS</a></li>
+            <li><a href="#">Resource 1</a></li>
+            <li><a href="#">Resource 2</a></li>
           </ul>
         </div>
       </div>
@@ -34,30 +33,305 @@
 
   <div class="container">
     <div ng-controller="HomeController">
-      <h1>{{ helloWorld }}</h1>
-      <p>Writing this live into the browser...</p>
+      <h1 ng-click="doStuff()">{{ helloWorld }}</h1>
     </div>
   </div>
 
   <hr/>
 
   <!-- /resources1 -->
-  <div class="container">
-    <h1>CAS</h1>
-    <h2>Listare CAS</h2>
+  <div class="container" ng-controller="HomeController">
+    <h1 id="Card">Card</h1>
+    <h2>List all cards</h2>
     <table class="table table-bordered">
       <tr>
-        <th>ID</th>
-        <th>CNP</th>
-        <th>ELIBERARE CARD</th>
-        <th>NAME</th>
+        <th ng-repeat="key in keysCard">{{ key }}</th>
+        <th style="width:210px;">Options</th>
+      </tr>
+      <tr ng-repeat="card in cards.data">
+        <td>{{ card.id }}</td>
+        <td>{{ card.name }}</td>
+        <td>
+           <a href="">
+            <span class="label label-success" ng-click="openCard(card)">
+              Open
+              <span class="glyphicon glyphicon-folder-open"></span>
+            </span>
+          </a>
+          <button ng-click="setUpdateCard(card)" class="btn btn-info btn-xs">
+              Edit
+              <span class="glyphicon glyphicon-edit"></span>
+          </button>
+          <button ng-click="deleteCard(card)" class="btn btn-danger btn-xs">
+              Remove
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+          </a>
+        </td>
+      </tr>
+    </table>
+          
+    <h2>Add new Card</h2>
+    <table>
+      <tr>
+        <td>Id </td>
+        <td><input type="text" class="form-control" ng-model="card.id"/></td>
+      </tr>
+      <tr>
+        <td>Name </td>
+        <td><input type="text" class="form-control" ng-model="card.name"/></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button ng-click="addCard(card)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+      </tr>
+    </table>
+
+    <h2>Edit Card</h2>
+    <table>
+      <tr>
+        <td>Id</td>
+        <td><input type="text" ng-model="editCard.id"></td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td><input type="text" ng-model="editCard.name"></td>
+      </tr>
+      <tr>
+        <td>New Name</td>
+        <td><input type="text" ng-model="newname"></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button class="btn btn-info btn-xs" ng-click="updateCard()">
+            Update
+          </button>
+        </td>
+      </tr>
+    </table>
+
+</div>
+
+
+
+  <!-- /resources2 -->
+  <div class="container" ng-controller="HomeController">
+    <h1 id="Cas">CAS</h1>
+    <h2>List all CAS</h2>
+    <table class="table table-bordered">
+      <tr>
+        <th ng-repeat="key in keysCas">{{ key }}</th>
+        <th style="width:210px;">Options</th>
+      </tr>
+      <tr ng-repeat="cas in cass.data">
+        <td>{{ cas.id }}</td>
+        <td>{{ cas.cnp }}</td>
+        <td>{{ cas.elib_card }}</td>
+        <td>{{ cas.name }}</td>
+        <td>{{ cas.address }}</td>
+        <td>
+           <a href="">
+            <span class="label label-success" ng-click="openCas(cas)">
+              Open
+              <span class="glyphicon glyphicon-folder-open"></span>
+            </span>
+          </a>
+          <button ng-click="setUpdateCas(cas)" class="btn btn-info btn-xs">
+              Edit
+              <span class="glyphicon glyphicon-edit"></span>
+          </button>
+          <button ng-click="deleteCas(cas)" class="btn btn-danger btn-xs">
+              Remove
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+          </a>
+        </td>
+      </tr>
+    </table>
+          
+    <h2>Add new CAS</h2>
+    <table>
+      <tr>
+        <td>Id </td>
+        <td><input type="text" class="form-control" ng-model="cas.id"/></td>
+      </tr>
+            <tr>
+        <td>CPN </td>
+        <td><input type="text" class="form-control" ng-model="cas.cnp"/></td>
+      </tr>
+            <tr>
+        <td>ELIB CARD </td>
+        <td><input type="text" class="form-control" ng-model="cas.elib_card"/></td>
+      </tr>
+            <tr>
+        <td>NAME </td>
+        <td><input type="text" class="form-control" ng-model="cas.name"/></td>
+      </tr>
+      <tr>
+        <td>ADDRESS </td>
+        <td><input type="text" class="form-control" ng-model="cas.address"/></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button ng-click="addCas(cas)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+      </tr>
+    </table>
+
+    <h2>Edit CAS</h2>
+    <table>
+      <tr>
+        <td>Id</td>
+        <td><input type="text" ng-model="editCas.id"></td>
+      </tr>
+      <tr>
+        <td>New Name</td>
+        <td><input type="text" ng-model="newName"></td>
+      </tr>
+      <td>Address</td>
+        <td><input type="text" ng-model="address"></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button class="btn btn-info btn-xs" ng-click="updateCas()">
+            Update
+          </button>
+        </td>
+      </tr>
+    </table>
+
+</div>
+
+
+
+
+
+
+<!-- /resources3 -->
+  <div class="container" ng-controller="HomeController">
+    <h1 id="Persoana">Persoana</h1>
+    <h2>List all Persoane</h2>
+    <table class="table table-bordered">
+      <tr>
+        <th ng-repeat="key in keysPersoanas">{{ key }}</th>
+        <th style="width:210px;">Options</th>
+      </tr>
+      <tr ng-repeat="persoana in persoanas.data">
+        <td>{{ persoana.id }}</td>
+        <td>{{ persoana.name }}</td>
+        <td>
+           <a href="">
+            <span class="label label-success" ng-click="openPersoana(persoana)">
+              Open
+              <span class="glyphicon glyphicon-folder-open"></span>
+            </span>
+          </a>
+                <button ng-click="deletePersoana(persoana)" class="btn btn-danger btn-xs">
+              Remove
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </td>
+      </tr>
+    </table>
+        
+
+</div>
+
+
+  <!--
+    <div class="row">
+      <div class="col-md-3">
+        <h2>Edit a resource1</h2>
+        <form action="" method="">
+          <div class="form-group">
+            <label for="attribute1">Attribute 1</label>
+            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1">
+          </div>
+          <div class="form-group">
+            <label for="attribute2">Attribute 2</label>
+            <input type="text" class="form-control" id="attribute2" placeholder="Attribute 2">
+          </div>
+          <div class="form-group">
+            <label for="attribute3">Attribute 3</label>
+            <input type="text" class="form-control" id="attribute3" placeholder="Attribute 3">
+          </div>
+          <div class="form-group">
+            <label for="attribute4">Attribute 4</label>
+            <input type="text" class="form-control" id="attribute4" placeholder="Attribute 4">
+          </div>
+          <button type="submit" class="btn btn-info">Save</button>
+        </form>
+      </div>
+
+
+      <div class="col-md-3 col-md-offset-6">
+        <h2>Add a resource1</h2>
+        <form action="" method="">
+          <div class="form-group">
+            <label for="attribute1">Attribute 1</label>
+            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1">
+          </div>
+          <div class="form-group">
+            <label for="attribute2">Attribute 2</label>
+            <input type="text" class="form-control" id="attribute2" placeholder="Attribute 2">
+          </div>
+          <div class="form-group">
+            <label for="attribute3">Attribute 3</label>
+            <input type="text" class="form-control" id="attribute3" placeholder="Attribute 3">
+          </div>
+          <div class="form-group">
+            <label for="attribute4">Attribute 4</label>
+            <input type="text" class="form-control" id="attribute4" placeholder="Attribute 4">
+          </div>
+          <button type="submit" class="btn btn-success">Add</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Show a resource1</h2>
+      </div>
+      <div class="col-md-2">
+        <img src="http://lorempixel.com/200/200/technics/?id=1" class="img-thumbnail"/>
+      </div>
+      <div class="col-md-10">
+        <h1>Attribute 1</h1>
+        <p>Attribute 2, Attribute 3</p>
+        <h3>Sub resource</h3>
+        <table class="table table-bordered table-striped">
+          <tr>
+            <th>Attribute 5</th>
+            <th>Attribute 6</th>
+          </tr>
+          <tr>
+            <td>Lorem ipsum</td>
+            <td>Lorem</td>
+          </tr>
+          <tr>
+            <td>Lorem ipsum dolor</td>
+            <td>Sir</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="container">
+    <h1>Resource 2</h1>
+    <h2>List all resources</h2>
+    <table class="table table-bordered">
+      <tr>
+        <th>Attribute 1</th>
+        <th>Attribute 2</th>
         <th style="width:210px;">Options</th>
       </tr>
       <tr>
-        <td>1</td>
-        <td>1976231512345</td>
-        <td>2015</td>
-        <td>Udrea</td>
+        <td>Lorem</td>
+        <td>Sit</td>
         <td>
           <a href="">
             <span class="label label-success">
@@ -80,10 +354,8 @@
         </td>
       </tr>
       <tr>
-        <td>2</td>
-        <td>1976231522345</td>
-        <td>2015</td>
-        <td>Dobrescu</td>
+        <td>Ipsum</td>
+        <td>Lorem</td>
         <td>
           <a href="">
             <span class="label label-success">
@@ -106,10 +378,8 @@
         </td>
       </tr>
       <tr>
-        <td>3</td>
-        <td>1976231512335</td>
-        <td>2015</td>
-        <td>Bolboaca</td>
+        <td>Sit</td>
+        <td>Dolor</td>
         <td>
           <a href="">
             <span class="label label-success">
@@ -132,10 +402,8 @@
         </td>
       </tr>
       <tr>
-        <td>4</td>
-        <td>1976231514245</td>
-        <td>2015</td>
-        <td>Dincu</td>
+        <td>Lorem</td>
+        <td>Ipsum</td>
         <td>
           <a href="">
             <span class="label label-success">
@@ -161,23 +429,15 @@
 
     <div class="row">
       <div class="col-md-3">
-        <h2>Edit CAS</h2>
+        <h2>Edit a resource2</h2>
         <form action="" method="">
           <div class="form-group">
-            <label for="attribute1">ID</label>
+            <label for="attribute1">Attribute 1</label>
             <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1">
           </div>
           <div class="form-group">
-            <label for="attribute2">CNP</label>
+            <label for="attribute2">Attribute 2</label>
             <input type="text" class="form-control" id="attribute2" placeholder="Attribute 2">
-          </div>
-		           <div class="form-group">
-            <label for="attribute1">ELIBERARE CARD</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1">
-          </div>
-		           <div class="form-group">
-            <label for="attribute1">Nume</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1">
           </div>
           <button type="submit" class="btn btn-info">Save</button>
         </form>
@@ -185,23 +445,15 @@
 
 
       <div class="col-md-3 col-md-offset-6">
-        <h2>Add CAS</h2>
+        <h2>Add a resource2</h2>
         <form action="" method="">
           <div class="form-group">
-            <label for="attribute1">ID</label>
+            <label for="attribute1">Attribute 1</label>
             <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1">
           </div>
           <div class="form-group">
-            <label for="attribute2">CNP</label>
+            <label for="attribute2">Attribute 2</label>
             <input type="text" class="form-control" id="attribute2" placeholder="Attribute 2">
-          </div>
-		           <div class="form-group">
-            <label for="attribute1">ELIBERARE CARD</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1">
-          </div>
-		           <div class="form-group">
-            <label for="attribute1">Nume</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1">
           </div>
           <button type="submit" class="btn btn-success">Add</button>
         </form>
@@ -210,73 +462,41 @@
 
     <div class="row">
       <div class="col-md-12">
-        <h2>Show CAS</h2>
+        <h2>Show a resource2</h2>
       </div>
       <div class="col-md-2">
-        <img src="http://lorempixel.com/200/200/technics/?id=1" class="img-thumbnail"/>
+        <img src="http://lorempixel.com/200/200/technics/?id=2" class="img-thumbnail"/>
       </div>
       <div class="col-md-10">
-        <h1>ID</h1>
-        <p>CNP, NUME</p>
+        <h1>Attribute 1</h1>
+        <p>Attribute 2, Attribute 3</p>
         <h3>Sub resource</h3>
         <table class="table table-bordered table-striped">
           <tr>
-            <th>Eliberare Card</th>
-           <th>Options</th>
+            <th>Attribute 5</th>
+            <th>Attribute 6</th>
           </tr>
           <tr>
-            <td>2015</td>
-			<td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-		</tr>
-		<tr>
-            <td>2015</td>
-			       <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
+            <td>Lorem ipsum</td>
+            <td>Lorem</td>
           </tr>
-        
+          <tr>
+            <td>Lorem ipsum dolor</td>
+            <td>Sir</td>
+          </tr>
         </table>
       </div>
     </div>
   </div>
 
   <hr/>
+-->
+  <div class="container">
+    <footer class="footer">
+      <p class="text-muted pull-left">AWJ Base Project &copy; 2015-2016</p>
+      <p class="text-muted pull-right">Sirbu Nicolae-Cezar, 331AA</p>
+    </footer>
+  </div>
 
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
